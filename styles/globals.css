@@ -1,0 +1,538 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  option {
+    /* Apply theme-aware background and text colors to dropdown options for readability */
+    background-color: rgb(var(--color-bg-secondary));
+    color: rgb(var(--color-text-primary));
+  }
+  
+  @keyframes highlight-glow {
+    0% {
+      background-color: rgba(var(--color-bg-accent), 0.3);
+      box-shadow: 0 0 15px rgba(var(--color-bg-accent), 0.5);
+    }
+    100% {
+      background-color: rgba(var(--color-bg-accent), 0.05);
+      box-shadow: 0 0 0 rgba(var(--color-bg-accent), 0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes badge-pop-in {
+    0% { transform: scale(0.5); opacity: 0; }
+    80% { transform: scale(1.1); opacity: 1; }
+    100% { transform: scale(1); opacity: 1; }
+  }
+}
+
+:root {
+  --header-height: 48px;
+}
+
+/* Default Theme: Sleek Carbon (Dark) */
+.theme-sleek-carbon {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 23 31 42; /* #171f2a */
+  --color-bg-secondary: 30 41 59; /* #1e293b */
+  --color-bg-tertiary: 48 59 79; /* #303b4f */
+  --color-bg-header: 15 23 42;   /* #0f172a */
+  --color-bg-accent: 37 99 235;  /* blue-600 */
+  --color-bg-accent-hover: 59 130 246; /* blue-500 */
+  
+  --color-text-primary: 226 232 240; /* slate-200 */
+  --color-text-secondary: 148 163 184; /* slate-400 */
+  --color-text-accent: 96 165 250;   /* blue-400 */
+  --color-text-inverted: 15 23 42;    /* slate-900 */
+
+  --color-border-primary: 51 65 85;   /* slate-700 */
+  --color-border-secondary: 71 85 105;  /* slate-600 */
+  --color-border-accent: 59 130 246; /* blue-500 */
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.15));
+  --glass-button-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  /* Light Content Vars */
+  --color-content-bg-primary: 243 244 246; /* gray-100 */
+  --color-content-bg-secondary: 255 255 255; /* white */
+  --color-content-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-content-bg-header: 255 255 255; /* white */
+  --color-content-text-primary: 17 24 39;     /* gray-900 */
+  --color-content-text-secondary: 75 85 99;      /* gray-600 */
+  --color-content-border-primary: 209 213 219; /* gray-300 */
+  --color-content-border-secondary: 229 231 235; /* gray-200 */
+}
+
+/* Oceanic Blue Theme (Dark) */
+.theme-oceanic-blue {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 12 28 45;   /* #0c1c2d */
+  --color-bg-secondary: 20 44 71;    /* #142c47 */
+  --color-bg-tertiary: 33 63 97;   /* #213f61 */
+  --color-bg-header: 8 19 31;      /* #08131f */
+  --color-bg-accent: 0 178 194;    /* teal-500 */
+  --color-bg-accent-hover: 20 184 166; /* teal-400 */
+
+  --color-text-primary: 207 222 237; /* #cfdeed */
+  --color-text-secondary: 139 161 184; /* #8ba1b8 */
+  --color-text-accent: 29 203 216;   /* #1dccd8 */
+  --color-text-inverted: 12 28 45;
+
+  --color-border-primary: 41 79 119;   /* #294f77 */
+  --color-border-secondary: 56 102 149;  /* #386695 */
+  --color-border-accent: 0 178 194;
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(220, 230, 255, 0.05), rgba(220, 230, 255, 0.15));
+  --glass-button-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+
+  /* Light Content Vars */
+  --color-content-bg-primary: 243 244 246; /* gray-100 */
+  --color-content-bg-secondary: 255 255 255; /* white */
+  --color-content-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-content-bg-header: 255 255 255; /* white */
+  --color-content-text-primary: 17 24 39;     /* gray-900 */
+  --color-content-text-secondary: 75 85 99;      /* gray-600 */
+  --color-content-border-primary: 209 213 219; /* gray-300 */
+  --color-content-border-secondary: 229 231 235; /* gray-200 */
+}
+
+/* Classic Light Theme */
+.theme-classic-light {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 243 244 246; /* gray-100 */
+  --color-bg-secondary: 255 255 255; /* white */
+  --color-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-bg-header: 255 255 255; /* white */
+  --color-bg-accent: 37 99 235;
+  --color-bg-accent-hover: 59 130 246;
+
+  --color-text-primary: 17 24 39;     /* gray-900 */
+  --color-text-secondary: 75 85 99;      /* gray-600 */
+  --color-text-accent: 29 78 216;    /* blue-700 */
+  --color-text-inverted: 255 255 255;
+
+  --color-border-primary: 209 213 219; /* gray-300 */
+  --color-border-secondary: 229 231 235; /* gray-200 */
+  --color-border-accent: 59 130 246;
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(0, 0, 0, 0.03), rgba(0, 0, 0, 0.06));
+  --glass-button-box-shadow: 0 4px 20px rgba(17, 24, 39, 0.1);
+
+  /* Dark Content Vars */
+  --color-content-bg-primary: 23 31 42; /* #171f2a */
+  --color-content-bg-secondary: 30 41 59; /* #1e293b */
+  --color-content-bg-tertiary: 48 59 79; /* #303b4f */
+  --color-content-bg-header: 15 23 42;   /* #0f172a */
+  --color-content-text-primary: 226 232 240; /* slate-200 */
+  --color-content-text-secondary: 148 163 184; /* slate-400 */
+  --color-content-border-primary: 51 65 85;   /* slate-700 */
+  --color-content-border-secondary: 71 85 105;  /* slate-600 */
+}
+
+/* Aero (Light) Theme */
+.theme-windows-aero {
+  --body-bg: linear-gradient(to bottom, #74bde8, #97d4f6);
+  --color-bg-primary: 240 245 250; /* Fallback */
+  --color-bg-secondary: 255 255 255 / 0.6; /* Main glass panels */
+  --color-bg-tertiary: 235 245 255 / 0.7; /* Input backgrounds */
+  --color-bg-header: 255 255 255 / 0.5;
+  --color-bg-accent: 50 120 220;  /* Windows Blue */
+  --color-bg-accent-hover: 80 150 240; /* Lighter Blue */
+  
+  --color-text-primary: 10 20 30; /* Dark Gray/Black */
+  --color-text-secondary: 80 90 110; /* Medium Gray */
+  --color-text-accent: 50 120 220;   /* Windows Blue */
+  --color-text-inverted: 255 255 255; /* White */
+
+  --color-border-primary: 150 180 220 / 0.7; /* Glass border */
+  --color-border-secondary: 180 200 220;  /* Input border */
+  --color-border-accent: 50 120 220; /* Windows Blue */
+
+  --color-btn-primary-bg: transparent;
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: linear-gradient(to bottom, rgb(100, 170, 240), rgb(50, 120, 220));
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.3));
+  --glass-button-box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+  /* Dark Content Vars */
+  --color-content-bg-primary: 23 31 42; /* #171f2a */
+  --color-content-bg-secondary: 30 41 59; /* #1e293b */
+  --color-content-bg-tertiary: 48 59 79; /* #303b4f */
+  --color-content-bg-header: 15 23 42;   /* #0f172a */
+  --color-content-text-primary: 226 232 240; /* slate-200 */
+  --color-content-text-secondary: 148 163 184; /* slate-400 */
+  --color-content-border-primary: 51 65 85;   /* slate-700 */
+  --color-content-border-secondary: 71 85 105;  /* slate-600 */
+}
+
+/* Aero Noir (Dark) Theme */
+.theme-aero-noir {
+  --body-bg: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+  --color-bg-primary: 15 20 30; /* Fallback */
+  --color-bg-secondary: 15 25 40 / 0.65; /* Dark glass panels */
+  --color-bg-tertiary: 30 45 65 / 0.5;
+  --color-bg-header: 15 25 40 / 0.5;
+  --color-bg-accent: 0 191 255;  /* Deep Sky Blue */
+  --color-bg-accent-hover: 60 210 255;
+
+  --color-text-primary: 230 240 255;
+  --color-text-secondary: 150 170 200;
+  --color-text-accent: 60 210 255;
+  --color-text-inverted: 15 20 30;
+
+  --color-border-primary: 80 150 220 / 0.5; /* Glowing glass border */
+  --color-border-secondary: 50 80 120;  /* Input border */
+  --color-border-accent: 0 191 255;
+
+  --color-btn-primary-bg: transparent;
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: linear-gradient(to bottom, rgb(20, 150, 220), rgb(0, 120, 190));
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(80, 150, 220, 0.2), rgba(80, 150, 220, 0.1));
+  --glass-button-box-shadow: 0 2px 15px rgba(0, 191, 255, 0.2);
+
+  /* Light Content Vars */
+  --color-content-bg-primary: 243 244 246; /* gray-100 */
+  --color-content-bg-secondary: 255 255 255; /* white */
+  --color-content-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-content-bg-header: 255 255 255; /* white */
+  --color-content-text-primary: 17 24 39;     /* gray-900 */
+  --color-content-text-secondary: 75 85 99;      /* gray-600 */
+  --color-content-border-primary: 209 213 219; /* gray-300 */
+  --color-content-border-secondary: 229 231 235; /* gray-200 */
+}
+
+/* Minty Fresh Theme (Light) */
+.theme-minty-fresh {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 240 255 245; /* very-light-green */
+  --color-bg-secondary: 255 255 255; /* white */
+  --color-bg-tertiary: 220 250 230; /* light-mint-green */
+  --color-bg-header: 255 255 255;   /* white */
+  --color-bg-accent: 16 185 129;  /* emerald-500 */
+  --color-bg-accent-hover: 52 211 153; /* emerald-400 */
+  
+  --color-text-primary: 20 50 40; /* dark-green-gray */
+  --color-text-secondary: 50 90 70; /* medium-green-gray */
+  --color-text-accent: 16 185 129;   /* emerald-500 */
+  --color-text-inverted: 255 255 255;    /* white */
+
+  --color-border-primary: 180 220 200;   /* light-green */
+  --color-border-secondary: 220 250 230;  /* very-light-green */
+  --color-border-accent: 16 185 129; /* emerald-500 */
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(20, 50, 40, 0.03), rgba(20, 50, 40, 0.06));
+  --glass-button-box-shadow: 0 4px 20px rgba(50, 90, 70, 0.15);
+
+  /* Dark Content Vars */
+  --color-content-bg-primary: 23 31 42; /* #171f2a */
+  --color-content-bg-secondary: 30 41 59; /* #1e293b */
+  --color-content-bg-tertiary: 48 59 79; /* #303b4f */
+  --color-content-bg-header: 15 23 42;   /* #0f172a */
+  --color-content-text-primary: 226 232 240; /* slate-200 */
+  --color-content-text-secondary: 148 163 184; /* slate-400 */
+  --color-content-border-primary: 51 65 85;   /* slate-700 */
+  --color-content-border-secondary: 71 85 105;  /* slate-600 */
+}
+
+/* Sakura Pink Theme (Light) */
+.theme-sakura-pink {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 255 245 250; /* very-light-pink */
+  --color-bg-secondary: 255 255 255; /* white */
+  --color-bg-tertiary: 254 226 226; /* light-pink */
+  --color-bg-header: 255 255 255;   /* white */
+  --color-bg-accent: 236 72 153;  /* pink-500 */
+  --color-bg-accent-hover: 244 114 182; /* pink-400 */
+  
+  --color-text-primary: 80 30 50; /* dark-purple-brown */
+  --color-text-secondary: 120 70 90; /* muted-pink-gray */
+  --color-text-accent: 236 72 153;   /* pink-500 */
+  --color-text-inverted: 255 255 255;    /* white */
+
+  --color-border-primary: 252 165 165;   /* light-pink-border */
+  --color-border-secondary: 254 226 226;  /* very-light-pink-border */
+  --color-border-accent: 236 72 153; /* pink-500 */
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(80, 30, 50, 0.03), rgba(80, 30, 50, 0.06));
+  --glass-button-box-shadow: 0 4px 20px rgba(120, 70, 90, 0.15);
+
+  /* Dark Content Vars */
+  --color-content-bg-primary: 23 31 42; /* #171f2a */
+  --color-content-bg-secondary: 30 41 59; /* #1e293b */
+  --color-content-bg-tertiary: 48 59 79; /* #303b4f */
+  --color-content-bg-header: 15 23 42;   /* #0f172a */
+  --color-content-text-primary: 226 232 240; /* slate-200 */
+  --color-content-text-secondary: 148 163 184; /* slate-400 */
+  --color-content-border-primary: 51 65 85;   /* slate-700 */
+  --color-content-border-secondary: 71 85 105;  /* slate-600 */
+}
+
+/* Matrix Green Theme (Dark) */
+.theme-matrix-green {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 5 10 5; /* near-black */
+  --color-bg-secondary: 15 20 15; /* very-dark-gray */
+  --color-bg-tertiary: 25 40 25; /* dark-green-gray */
+  --color-bg-header: 0 0 0;   /* black */
+  --color-bg-accent: 34 197 94;  /* green-500 */
+  --color-bg-accent-hover: 74 222 128; /* green-400 */
+  
+  --color-text-primary: 50 255 50; /* bright-green */
+  --color-text-secondary: 50 200 50; /* dimmer-green */
+  --color-text-accent: 74 222 128;   /* green-400 */
+  --color-text-inverted: 0 0 0;    /* black */
+
+  --color-border-primary: 20 60 20;   /* dark-green-border */
+  --color-border-secondary: 15 40 15;  /* darker-green-border */
+  --color-border-accent: 34 197 94; /* green-500 */
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 0 0 0;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(50, 255, 50, 0.05), rgba(50, 255, 50, 0.10));
+  --glass-button-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  /* Light Content Vars */
+  --color-content-bg-primary: 243 244 246; /* gray-100 */
+  --color-content-bg-secondary: 255 255 255; /* white */
+  --color-content-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-content-bg-header: 255 255 255; /* white */
+  --color-content-text-primary: 17 24 39;     /* gray-900 */
+  --color-content-text-secondary: 75 85 99;      /* gray-600 */
+  --color-content-border-primary: 209 213 219; /* gray-300 */
+  --color-content-border-secondary: 229 231 235; /* gray-200 */
+}
+
+/* Sunset Glow Theme (Dark) */
+.theme-sunset-glow {
+  --body-bg: rgb(var(--color-bg-primary));
+  --color-bg-primary: 25 20 40; /* very-dark-blue-purple */
+  --color-bg-secondary: 40 30 60; /* dark-blue-purple */
+  --color-bg-tertiary: 60 50 85; /* lighter-blue-purple */
+  --color-bg-header: 20 15 30;   /* near-black-purple */
+  --color-bg-accent: 249 115 22;  /* orange-500 */
+  --color-bg-accent-hover: 251 146 60; /* orange-400 */
+  
+  --color-text-primary: 255 250 230; /* light-yellow-off-white */
+  --color-text-secondary: 200 190 220; /* muted-lavender */
+  --color-text-accent: 251 146 60;   /* orange-400 */
+  --color-text-inverted: 25 20 40;    /* very-dark-blue-purple */
+
+  --color-border-primary: 80 70 110;   /* muted-purple-border */
+  --color-border-secondary: 50 40 70;  /* dark-purple-border */
+  --color-border-accent: 249 115 22; /* orange-500 */
+
+  --color-btn-primary-bg: var(--color-bg-accent);
+  --color-btn-primary-text: 255 255 255;
+  --color-btn-primary-bg-image: none;
+  --color-btn-secondary-bg: var(--color-bg-tertiary);
+  --color-btn-secondary-text: var(--color-text-primary);
+
+  --glass-button-bg-image: linear-gradient(to top, rgba(255, 250, 230, 0.05), rgba(255, 250, 230, 0.10));
+  --glass-button-box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+
+  /* Light Content Vars */
+  --color-content-bg-primary: 243 244 246; /* gray-100 */
+  --color-content-bg-secondary: 255 255 255; /* white */
+  --color-content-bg-tertiary: 229 231 235; /* gray-200 */
+  --color-content-bg-header: 255 255 255; /* white */
+  --color-content-text-primary: 17 24 39;     /* gray-900 */
+  --color-content-text-secondary: 75 85 99;      /* gray-600 */
+  --color-content-border-primary: 209 213 219; /* gray-300 */
+  --color-content-border-secondary: 229 231 235; /* gray-200 */
+}
+
+
+/* Button Styles */
+.buttons-sharp {
+  --btn-radius: 0.125rem; /* 2px */
+}
+.buttons-rounded {
+  --btn-radius: 0.5rem; /* 8px */
+}
+
+body {
+    background: var(--body-bg);
+    background-color: rgb(var(--color-bg-primary)); /* Fallback */
+    background-attachment: fixed;
+    color: rgb(var(--color-text-primary));
+    height: 100vh;
+    overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 16px;
+  height: 16px;
+}
+::-webkit-scrollbar-track {
+  background: rgb(var(--color-bg-secondary));
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgb(var(--color-bg-accent));
+  border-radius: 8px;
+  border: 3px solid rgb(var(--color-bg-secondary));
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgb(var(--color-bg-accent-hover));
+}
+
+@layer components {
+    .btn {
+        @apply px-4 py-2 text-sm font-bold transition-colors shadow-sm;
+        border-radius: var(--btn-radius);
+    }
+    .btn-primary {
+        @apply btn;
+        background-color: rgb(var(--color-btn-primary-bg));
+        background-image: var(--color-btn-primary-bg-image, none);
+        color: rgb(var(--color-btn-primary-text));
+        border: 1px solid rgba(var(--color-border-accent), 0.5);
+    }
+    .btn-primary:hover {
+        background-color: rgb(var(--color-bg-accent-hover));
+        filter: brightness(1.1);
+    }
+    .btn-primary:disabled {
+        background-color: rgb(var(--color-bg-tertiary));
+        background-image: none;
+        color: rgb(var(--color-text-secondary));
+        cursor: not-allowed;
+        opacity: 0.6;
+        filter: none;
+    }
+
+    .glass-button {
+      @apply flex items-center justify-center p-3 flex-col h-full text-center;
+      background-color: rgba(var(--color-content-bg-tertiary), 0.5);
+      border: 1px solid rgba(var(--color-content-border-primary), 0.3);
+      border-radius: var(--btn-radius);
+      box-shadow: 0 4px 20px rgba(0,0,0, 0.1);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      transition: all 0.2s ease-in-out;
+    }
+    .glass-button:hover {
+      background-color: rgba(var(--color-bg-accent), 0.15);
+      border-color: rgba(var(--color-border-accent), 0.5);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 25px rgba(var(--color-bg-accent), 0.2);
+    }
+    .glass-button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+      border-color: rgba(var(--color-content-border-primary), 0.3);
+      background-color: rgba(var(--color-content-bg-tertiary), 0.5);
+      box-shadow: 0 4px 20px rgba(0,0,0, 0.1);
+    }
+    .ai-populated-highlight {
+      animation: highlight-glow 2s ease-out forwards;
+    }
+    .animate-fade-in {
+      animation: fade-in 0.5s ease-out forwards;
+    }
+    .animate-badge-pop-in {
+      animation: badge-pop-in 0.3s ease-out forwards;
+    }
+}
+
+@media print {
+  body, html {
+    background: white !important;
+    color: black !important;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+  
+  main#printable-area {
+    padding: 0 !important;
+    overflow: visible !important;
+    height: auto !important;
+    max-height: none !important;
+  }
+  
+  .printable-document-container {
+      padding: 0;
+  }
+
+  .printable-document {
+    width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    color: black !important;
+    border-radius: 0 !important;
+    display: block !important;
+    font-size: 10pt;
+  }
+
+  .printable-document-container h1 {
+      font-size: 18pt;
+  }
+
+   .printable-document-container h2 {
+      font-size: 14pt;
+  }
+  
+  @page {
+    size: A4;
+    margin: 1.5cm;
+  }
+}
